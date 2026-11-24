@@ -7,9 +7,8 @@ from ejercicios.newton_lagrange.tabla_diferencias import tabla_diferencias
 
 
 def coeficientes_newton(x, y):
-    """Devuelve [b0, b1, ..., bn]: la diagonal de la tabla."""
     T = tabla_diferencias(x, y)
-    raise NotImplementedError("Completa coeficientes_newton")
+    return [T[k][k] for k in range(len(x))]
 
 
 if __name__ == "__main__":
