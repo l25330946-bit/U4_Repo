@@ -12,17 +12,20 @@ from ejercicios.interpolacion.error_estimado_interpolacion import (
 
 
 def interpolacion_lineal(x0, y0, x1, y1, x, x2=None, y2=None):
-    """Devuelve ``(y, error)``.
+    """Devuelve ``(y, error)``."""
+    # Ecuación (18.2): recta por (x0, y0) y (x1, y1)
+    pendiente = (y1 - y0) / (x1 - x0)
+    y = y0 + pendiente * (x - x0)
 
-    y     : valor interpolado con la recta que pasa por (x0, y0) y (x1, y1).
-    error : ``None`` si no hay tercer dato; si lo hay,
-            ``R1 = f[x2,x1,x0] * (x - x0) * (x - x1)``.
+    # Error (18.18): solo si hay tercer dato
+    error = None
+    if x2 is not None and y2 is not None:
+        f_x2_x1 = (y2 - y1) / (x2 - x1)           # f[x2, x1]
+        f_x1_x0 = pendiente                        # f[x1, x0]
+        f_x2_x1_x0 = (f_x2_x1 - f_x1_x0) / (x2 - x0)  # f[x2, x1, x0]
+        error = f_x2_x1_x0 * (x - x0) * (x - x1)
 
-    x2, y2 son OPCIONALES: puedes terminar el método sin usarlos y, cuando
-    escribas ``error_estimado_interpolacion``, regresar aquí y activarlos.
-    """
-    # error = None
-    # return y, error
+    return y, error
     raise NotImplementedError("Completa interpolacion_lineal")
 
 
