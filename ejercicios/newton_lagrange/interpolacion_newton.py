@@ -10,7 +10,7 @@ from ejercicios.newton_lagrange.evaluar_newton import evaluar_newton
 def interpolacion_newton(x, y, xx):
     """Interpola con el polinomio de Newton en ``xx``."""
     coef = coeficientes_newton(x, y)
-    raise NotImplementedError("Completa interpolacion_newton")
+    return evaluar_newton(coef, x, xx)
 
 
 if __name__ == "__main__":
