@@ -10,7 +10,10 @@ def error_estimado_interpolacion(dif_siguiente, nodos, x):
     nodos         : lista x0 ... xn.
     x             : punto donde se evalúa.
     """
-    raise NotImplementedError("Completa error_estimado_interpolacion")
+    producto = 1.0
+    for xi in nodos:
+        producto *= (x - xi)
+    return dif_siguiente * producto
 
 
 if __name__ == "__main__":
