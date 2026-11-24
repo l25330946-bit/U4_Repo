@@ -3,9 +3,12 @@
 Libro: ecuación (18.7), evaluada con Horner.
 """
 
-def evaluar_newton(x, coef, xx):
-    """Evalúa el polinomio de Newton con los nodos ``x`` y los ``coef``."""
-    raise NotImplementedError("Completa evaluar_newton")
+def evaluar_newton(coef, x, xx):
+    n = len(coef)
+    p = coef[n - 1]
+    for k in range(n - 2, -1, -1):
+        p = p * (xx - x[k]) + coef[k]
+    return p
 
 
 if __name__ == "__main__":
