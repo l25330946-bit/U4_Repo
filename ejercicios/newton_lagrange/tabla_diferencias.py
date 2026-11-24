@@ -9,7 +9,17 @@ def tabla_diferencias(x, y):
     T[i][0] = y[i]
     T[i][j] = (T[i][j-1] - T[i-1][j-1]) / (x[i] - x[i-j])
     """
-    raise NotImplementedError("Completa tabla_diferencias")
+    n = len(x)
+    T = [[0.0] * n for _ in range(n)]
+
+    for i in range(n):
+        T[i][0] = y[i]
+
+    for j in range(1, n):
+        for i in range(j, n):
+            T[i][j] = (T[i][j-1] - T[i-1][j-1]) / (x[i] - x[i-j])
+
+    return T
 
 
 if __name__ == "__main__":
