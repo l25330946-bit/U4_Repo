@@ -24,13 +24,28 @@ def interpolacion_cuadratica(x0, y0, x1, y1, x2, y2, x, x3=None, y3=None):
     y     : valor interpolado con la parábola que pasa por los tres nodos.
     error : ``None`` si no hay cuarto dato; si lo hay,
             ``R2 = f[x3,x2,x1,x0] * (x - x0)(x - x1)(x - x2)``.
-
-    x3, y3 son OPCIONALES: puedes terminar el método sin usarlos y, cuando
-    escribas ``error_estimado_interpolacion``, regresar aquí y activarlos.
     """
-    # error = None
-    # return y, error
-    raise NotImplementedError("Completa interpolacion_cuadratica")
+    # Pendientes entre tramos consecutivos
+    m1 = (y1 - y0) / (x1 - x0)
+    m2 = (y2 - y1) / (x2 - x1)
+
+    # Coeficientes (18.4), (18.5), (18.6)
+    b0 = y0
+    b1 = m1
+    b2 = (m2 - m1) / (x2 - x0)
+
+    # Forma anidada (18.3)
+    y = b0 + b1 * (x - x0) + b2 * (x - x0) * (x - x1)
+
+    # Error (18.18): solo si hay cuarto dato
+    error = None
+    if x3 is not None and y3 is not None:
+        m3 = (y3 - y2) / (x3 - x2)                      # f[x3, x2]
+        f_x3_x2_x1 = (m3 - m2) / (x3 - x1)              # f[x3, x2, x1]
+        f_x3_x2_x1_x0 = (f_x3_x2_x1 - b2) / (x3 - x0)   # f[x3, x2, x1, x0]
+        error = f_x3_x2_x1_x0 * (x - x0) * (x - x1) * (x - x2)
+
+    return y, error
 
 
 if __name__ == "__main__":
