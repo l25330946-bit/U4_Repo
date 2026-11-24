@@ -5,7 +5,17 @@ Libro: ecuaciones (18.20) y (18.21).
 
 def interpolacion_lagrange(x, y, xx):
     """Evalúa el polinomio de Lagrange en ``xx``."""
-    raise NotImplementedError("Completa interpolacion_lagrange")
+    n = len(x)
+    suma = 0.0
+    for i in range(n):
+        # Peso L_i(xx), ecuación (18.21)
+        L = 1.0
+        for j in range(n):
+            if j != i:
+                L *= (xx - x[j]) / (x[i] - x[j])
+        # Término de (18.20)
+        suma += L * y[i]
+    return suma
 
 
 if __name__ == "__main__":
