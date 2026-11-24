@@ -22,6 +22,12 @@ def tabla_diferencias(x, y):
     return T
 
 
+def coeficientes_newton(x, y):
+    """Devuelve la diagonal de la tabla: b0, b1, ..., bn."""
+    T = tabla_diferencias(x, y)
+    return [T[k][k] for k in range(len(x))]
+
+
 if __name__ == "__main__":
     T = tabla_diferencias([1, 4, 6], [0, 1.386294, 1.791759])
     for fila in T:
